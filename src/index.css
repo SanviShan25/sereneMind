@@ -2,96 +2,151 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* SereneMind Design System - Aurora-themed mental wellness platform */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Aurora Dark Theme - Deep space backgrounds with vibrant accents */
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 8% 8%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 8% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Aurora Primary - Violet to Blue gradient base */
+    --primary: 260 75% 60%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 260 75% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Aurora Secondary - Soft teal accent */
+    --secondary: 180 50% 30%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Aurora Muted - Subtle background elements */
+    --muted: 240 8% 12%;
+    --muted-foreground: 240 15% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Aurora Accent - Mint highlight */
+    --accent: 160 60% 50%;
+    --accent-foreground: 240 10% 4%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 15% 20%;
+    --input: 240 8% 12%;
+    --ring: 260 75% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Aurora Gradients */
+    --gradient-aurora: linear-gradient(135deg, hsl(260 75% 60%), hsl(220 75% 65%), hsl(180 60% 55%), hsl(160 60% 50%));
+    --gradient-text: linear-gradient(135deg, hsl(260 75% 70%), hsl(220 75% 70%), hsl(160 60% 60%));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(260 75% 60% / 0.3), transparent 70%);
+    
+    /* Glass Morphism */
+    --glass-bg: hsl(240 8% 8% / 0.6);
+    --glass-border: hsl(240 15% 20% / 0.3);
+    --glass-blur: blur(12px);
   }
+}
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+/* Aurora Animation Keyframes */
+@keyframes aurora-drift {
+  0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1); }
+  33% { transform: translateX(-50%) translateY(-50%) rotate(120deg) scale(1.1); }
+  66% { transform: translateX(-50%) translateY(-50%) rotate(240deg) scale(0.9); }
+}
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.6); }
+}
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+/* Aurora Background Effect */
+.aurora-bg::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 120vw;
+  height: 120vh;
+  background: var(--gradient-aurora);
+  opacity: 0.1;
+  animation: aurora-drift 20s infinite linear;
+  z-index: -1;
+}
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+/* Glass Morphism Classes */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+.glass-glow {
+  position: relative;
+}
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+.glass-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  padding: 2px;
+  background: var(--gradient-aurora);
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+.glass-glow:hover::before {
+  opacity: 1;
+}
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Hover Effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px hsl(var(--primary) / 0.2);
+}
+
+/* Glow Effects */
+.glow-border {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
 }
 
 @layer base {
@@ -100,6 +155,11 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground aurora-bg;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
