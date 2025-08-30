@@ -32,14 +32,14 @@ export function Navbar() {
               Home
             </Link>
             <Link
-              to="/chatbot"
+              to="/emergency"
               className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                location.pathname === '/chatbot'
+                location.pathname === '/emergency'
                   ? 'bg-primary/20 text-primary border border-primary/30'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
               }`}
             >
-              Chatbot
+              Emergency
             </Link>
           </div>
         </div>

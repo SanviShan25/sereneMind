@@ -7,6 +7,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom"; // â¬…ï¸
 import { Navbar } from "@/components/Navbar";
 import Index from "./pages/Index";
 import Chatbot from "./pages/Chatbot";
+import Emergency from "./pages/Emergency";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,9 @@ const App = () => (
 
             {/* Chatbot screen (navigate('/chatbot') after submit) */}
             <Route path="/chatbot" element={<Chatbot />} />
+
+            {/* Emergency contacts */}
+            <Route path="/emergency" element={<Emergency />} />
 
             {/* 404 */}
             <Route path="*" element={<NotFound />} />

@@ -41,6 +41,9 @@ export function HealthIntakeForm() {
         timestamp: new Date().toISOString(),
       }))
 
+      // Show success alert
+      alert("Registration Successful! 🎉\n\nWelcome to SereneMind. Your information has been saved securely.")
+
       toast({
         title: "Welcome to SereneMind!",
         description: "Your information has been saved securely. Let's start your wellness journey.",
