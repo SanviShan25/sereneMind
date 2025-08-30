@@ -37,7 +37,7 @@ export function HealthIntakeForm() {
     
     try {
       // Save to Supabase database
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('user_registrations')
         .insert({
           full_name: data.fullName,
