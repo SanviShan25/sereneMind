@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { useToast } from '@/hooks/use-toast'
 import { Send } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 const formSchema = z.object({
   fullName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -35,14 +36,27 @@ export function HealthIntakeForm() {
     setIsSubmitting(true)
     
     try {
-      // Save to localStorage for privacy
+      // Save to Supabase database
+      const { error } = await supabase
+        .from('user_registrations')
+        .insert({
+          full_name: data.fullName,
+          email: data.email,
+          registration_date: data.date
+        })
+
+      if (error) {
+        throw error
+      }
+
+      // Also save to localStorage for chatbot access
       localStorage.setItem('sereneMindIntake', JSON.stringify({
         ...data,
         timestamp: new Date().toISOString(),
       }))
 
       // Show success alert
-      alert("Registration Successful! 🎉\n\nWelcome to SereneMind. Your information has been saved securely.")
+      alert("Registration Successful! 🎉\n\nWelcome to SereneMind. Your information has been saved securely to our database.")
 
       toast({
         title: "Welcome to SereneMind!",
@@ -54,8 +68,9 @@ export function HealthIntakeForm() {
         navigate('/chatbot')
       }, 1500)
     } catch (error) {
+      console.error('Registration error:', error)
       toast({
-        title: "Something went wrong",
+        title: "Registration failed",
         description: "Please try again in a moment.",
         variant: "destructive",
       })
